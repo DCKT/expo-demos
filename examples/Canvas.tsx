@@ -1,19 +1,12 @@
-import React from "react"
-import Expo2DContext from "expo-2d-context"
-import { GLView } from "expo-gl"
-import {
-  Text,
-  PanResponder,
-  TouchableHighlight,
-  Button,
-  View,
-  Image
-} from "react-native"
-import { captureRef as takeSnapshotAsync } from "react-native-view-shot"
+import React from 'react'
+import Expo2DContext from 'expo-2d-context'
+import { GLView } from 'expo-gl'
+import { Text, PanResponder, TouchableHighlight, Button, View, Image } from 'react-native'
+import { captureRef as takeSnapshotAsync } from 'react-native-view-shot'
 
 const draw = context => {
-  context.strokeStyle = "#df4b26"
-  context.lineJoin = "round"
+  context.strokeStyle = '#df4b26'
+  context.lineJoin = 'round'
   context.lineWidth = 5
 
   context.beginPath()
@@ -36,7 +29,7 @@ export default function Canvas() {
           const [x, y] = [event.nativeEvent.pageX, event.nativeEvent.pageY]
 
           ctx.beginPath()
-          ctx.fillStyle = "black"
+          ctx.fillStyle = 'black'
           ctx.arc(x, y, 8, 0, 2 * Math.PI)
           ctx.fill()
           ctx.flush()
@@ -62,11 +55,9 @@ export default function Canvas() {
 
         <Button
           onPress={() => {
-            takeSnapshotAsync(viewRef.current, { result: "base64" }).then(
-              data => {
-                setHistory([`data:image/png;base64,${data}`, ...history])
-              }
-            )
+            takeSnapshotAsync(viewRef.current, { result: 'base64' }).then(data => {
+              setHistory([`data:image/png;base64,${data}`, ...history])
+            })
           }}
           title="SAVE"
           color="#1CBED2"
@@ -78,21 +69,21 @@ export default function Canvas() {
         ref={viewRef}
         onContextCreate={gl => {
           const context = new Expo2DContext(gl)
-          context.scale(2, 2)
+          context.scale(2.2, 2.2)
           setCtx(context)
         }}
         {...panResponder.panHandlers}
       />
       <View
         style={{
-          position: "absolute",
+          position: 'absolute',
           bottom: 30,
           left: 0,
-          width: "100%",
+          width: '100%',
           paddingHorizontal: 30,
           flex: 0,
-          flexDirection: "row",
-          alignItems: "center"
+          flexDirection: 'row',
+          alignItems: 'center'
         }}
       >
         {history.map((uri, index) => (
@@ -102,9 +93,9 @@ export default function Canvas() {
               width: 70,
               height: 70,
               borderWidth: 1,
-              borderColor: "#666",
+              borderColor: '#666',
               marginRight: 10,
-              resizeMode: "contain",
+              resizeMode: 'contain',
               borderRadius: 4
             }}
             source={{ uri }}
